@@ -117,4 +117,11 @@ while ans == "Yes" or ans == "yes":
 
 
     else:
-        print()
+        print("if you can't say yes or no i'll just leave!")
+        time.sleep(2)
+        if name == "Solomon" or name == "solomon" or name == "Kori":
+            print("Goodbye!")
+        else:
+            time.sleep(8)
+            print("The fool...")
+
