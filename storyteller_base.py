@@ -15,7 +15,7 @@ class Location:
         self.name = name
         self.ways_out = {}
 
-    def add_exit_action(self, my_exit: Direction):
+    def add_exit_action(self, my_exit):
         self.ways_out[my_exit.action] = my_exit
 
 
