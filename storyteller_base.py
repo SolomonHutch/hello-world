@@ -17,9 +17,15 @@ class Location:
     def add_exit_action(self, my_exit):
         self.exits[my_exit.action] = my_exit
 
+    def __repr__(self):
+        return f'<Location "{self.description[:40]}" exits:{str(self.exits)}>'
+
+    def __hash__(self):
+        return self.description.__hash__()
+
 
 start_location = Location('You are in a grass field with a shed and a castle')
-game_map = {start_location.description: start_location}
+game_map = {start_location}
 
 
 class Direction:
@@ -40,4 +46,5 @@ def add_location(room_that_youre_leaving: Location,
     old_loc.add_exit_action(action_just_taken)
     return_route = Direction(how_to_get_back, old_loc)
     new_loc.add_exit_action(return_route)
-    game_map[new_loc.description] = new_loc  # description is also used as the hash key in the dict
+    game_map.add(new_loc)  # description is also used as the hash key in the dict
+    return new_loc

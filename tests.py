@@ -19,9 +19,8 @@ def test_create_objects():
 
 def test_add_location():
     desc = "The pond is very wet."
-    add_location(start_location, 'jump', desc, "Swim to shore")
-    assert desc in game_map
-    new_loc = game_map[desc]
+    new_loc = add_location(start_location, 'jump', desc, "Swim to shore")
+    assert new_loc in game_map
     assert "Swim to shore" in new_loc.exits
 
 
