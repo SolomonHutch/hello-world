@@ -13,10 +13,10 @@ class Location:
         they are entering."""
         self.description = description
         self.name = name
-        self.ways_out = {}
+        self.exits = {}
 
     def add_exit_action(self, my_exit):
-        self.ways_out[my_exit.action] = my_exit
+        self.exits[my_exit.action] = my_exit
 
 
 game_map = {'start': Location('You are in a grass field with a shed and a castle', 'start')}
@@ -25,7 +25,7 @@ game_map = {'start': Location('You are in a grass field with a shed and a castle
 class Direction:
     def __init__(self, action: str, destination: Location):
         self.action = action
-        self.entering_location = destination
+        self.destination = destination
 
 
 def add_location(room_that_youre_leaving: Location, action_taken: str,
@@ -38,3 +38,4 @@ def add_location(room_that_youre_leaving: Location, action_taken: str,
     old_loc.add_exit_action(action_just_taken)
     return_route = Direction(how_to_get_back, old_loc)
     new_loc.add_exit_action(return_route)
+    game_map[room_entering] = new_loc
