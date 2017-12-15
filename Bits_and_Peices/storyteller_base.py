@@ -15,10 +15,11 @@ class Location:
         self.exits = {}
 
     def add_exit_action(self, my_exit):
-        self.exits[my_exit.action] = my_exit
+        self.exits[my_exit.action.lower()] = my_exit
 
     def __repr__(self):
-        return f'<Location "{self.description[:40]}" exits:{str(self.exits)}>'
+        exit_str = "; ".join([str(x) for x in self.exits.values()])
+        return f'<Location "{self.description[:40]}" exits:{exit_str}>'
 
     def __hash__(self):
         return self.description.__hash__()
