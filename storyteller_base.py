@@ -33,6 +33,9 @@ class Direction:
         self.action = action
         self.destination = destination
 
+    def __repr__(self):
+        return f'<"{self.action}" -> "{self.destination.description[:15]}...">'
+
 
 def add_location(room_that_youre_leaving: Location,
                  action_taken: str,
