@@ -1,4 +1,3 @@
-.idea/*
 venv
 .idea
 
@@ -107,3 +106,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.idea/encodings.xml
+.idea/hello-world.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs - Copy.xml
+.idea/workspace.xml
