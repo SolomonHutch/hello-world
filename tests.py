@@ -3,7 +3,7 @@
 2. then call it from all_tests.
 
 You can upgrade to a module called 'nose' later."""
-from storyteller_base import Location, Direction, add_location, game_map
+from storyteller_base import Location, Direction, add_location, game_map, start_location
 
 
 def test_env():
@@ -12,15 +12,17 @@ def test_env():
 
 
 def test_create_objects():
-    s = Location('a place', 'a test')
+    s = Location('a place',)
     north = Direction('go north', s)
     assert isinstance(north.destination, Location)
 
 
 def test_add_location():
-    add_location(game_map['start'], 'jump', 'pond', "It's very wet.", "Swim to shore")
-    assert 'pond' in game_map
-    assert "Swim to shore" in game_map['pond'].exits
+    desc = "The pond is very wet."
+    add_location(start_location, 'jump', desc, "Swim to shore")
+    assert desc in game_map
+    new_loc = game_map[desc]
+    assert "Swim to shore" in new_loc.exits
 
 
 def all_tests():
