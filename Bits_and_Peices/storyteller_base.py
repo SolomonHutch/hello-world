@@ -46,9 +46,16 @@ class Direction:
 def add_location(room_that_youre_leaving: Location,
                  action_taken: str,
                  description: str,
-                 how_to_get_back: str):
+                 how_to_get_back: str,
+                 save=False):
     """Solves the chicken and Egg problem of creating Locations and Directions
     that know about each other.  Use this to expand the game_map."""
+    if isinstance(room_that_youre_leaving, str):  # look up based on description
+        try:
+            room_that_youre_leaving = game_map[room_that_youre_leaving]
+        except KeyError:
+            print(f"I couldn't find {room_that_youre_leaving} on the map")
+    save_string = f"add_location({room_that_youre_leaving.description!r}, {action_taken!r}, {description!r}, {how_to_get_back!r})\n"
     old_loc = room_that_youre_leaving
     new_loc = Location(description)
     action_just_taken = Direction(action_taken, new_loc)
@@ -56,6 +63,10 @@ def add_location(room_that_youre_leaving: Location,
     return_route = Direction(how_to_get_back, old_loc)
     new_loc.add_exit_action(return_route)
     game_map[new_loc.description] = new_loc  # description is also used as the hash key in the dict
+    if save:
+        with open('level_save.py', 'a') as save_file:
+            save_file.write(save_string)
+
     return new_loc
 
 
