@@ -3,7 +3,7 @@
 2. then call it from all_tests.
 
 You can upgrade to a module called 'nose' later."""
-from storyteller_base import Location, Direction, add_location, game_map, start_location
+from Bits_and_Peices.storyteller_base import Location, Direction, add_location, game_map, start_location
 
 
 def test_env():
