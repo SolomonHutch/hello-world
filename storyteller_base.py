@@ -15,13 +15,26 @@ class Location:
         self.name = name
         self.ways_out = {}
 
-    def add_exit_action(self, leaving_direction: Direction):
-        self.ways_out[leaving_direction.leaving_action] = leaving_direction
+    def add_exit_action(self, my_exit: Direction):
+        self.ways_out[my_exit.action] = my_exit
+
+
+game_map = {'start': Location('You are in a grass field with a shed and a castle', 'start')}
 
 
 class Direction:
-    def __init__(self, entering_action: str, entering_location: Location):
-        self.entering_action = entering_action
-        self.entering_location = entering_location
-        self.leaving_action = None
-        self.leaving_location = None
+    def __init__(self, action: str, destination: Location):
+        self.action = action
+        self.entering_location = destination
+
+
+def add_location(room_that_youre_leaving: Location, action_taken: str,
+                 room_entering: str, description: str, how_to_get_back: str):
+    """Solves the chicken and Egg problem of creating Locations and Directions
+    that know about each other.  Use this to expand the game_map."""
+    old_loc = room_that_youre_leaving
+    new_loc = Location(description, room_entering)
+    action_just_taken = Direction(action_taken, new_loc)
+    old_loc.add_exit_action(action_just_taken)
+    return_route = Direction(how_to_get_back, old_loc)
+    new_loc.add_exit_action(return_route)
