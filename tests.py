@@ -27,8 +27,8 @@ def all_tests():
     test_env()
     test_create_objects()
     test_add_location()
+    print("All tests pass")
 
 
 if __name__ == '__main__':
     all_tests()
-    print("All tests pass")
