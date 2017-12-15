@@ -57,3 +57,14 @@ def add_location(room_that_youre_leaving: Location,
     new_loc.add_exit_action(return_route)
     game_map[new_loc.description] = new_loc  # description is also used as the hash key in the dict
     return new_loc
+
+
+def add_connection(location_A: Location,
+                   action_A: str,
+                   location_B: Location,
+                   action_B: str):
+    dir_A = Direction(action_A, location_A)
+    location_B.add_exit_action(dir_A)
+    dir_B = Direction(action_B, location_B)
+    location_A.add_exit_action(dir_B)
+    return (dir_A, dir_B)
